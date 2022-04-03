@@ -75,9 +75,9 @@ using namespace zich;
 
         Matrix Matrix::operator+(double scalr){
             Matrix m = Matrix(*this);
-            for (int i = 0; i < (*this).getrow(); i++)
+            for (size_t i = 0; i < (*this).getrow(); i++)
             {
-                for (int j = 0; j < (*this).getcol(); j++)
+                for (size_t j = 0; j < (*this).getcol(); j++)
                 {
                     m.mat[i][j]+= scalr;
                 }
@@ -86,9 +86,9 @@ using namespace zich;
         }
         Matrix Matrix::operator+(){
             Matrix m = Matrix(*this);
-            for (int i = 0; i < (*this).getrow(); i++)
+            for (size_t i = 0; i < (*this).getrow(); i++)
             {
-                for (int j = 0; j < (*this).getcol(); j++)
+                for (size_t j = 0; j < (*this).getcol(); j++)
                 {
                     if(m.mat[i][j] < 0){
                     m.mat[i][j] *= -1;
@@ -299,62 +299,97 @@ using namespace zich;
 
 
         Matrix Matrix::operator*(Matrix &a){
-            // if((*this).row != a.row || (*this).col != a.col){
-            //         throw("Iligiel of size matrtix");
-            //     }
+            
             if((*this).col != a.row){
                     throw("Iligiel of size matrtix");
                 }
-            Matrix m = Matrix();
+            Matrix m = Matrix(*this);
+        
             for (size_t i = 0; i < a.row; i++)
             {
-                for (size_t j = 0; j < a.col; j++)
+                int sum=0;
+                for (size_t j = 0; j < m.col; j++)
                 {
-                    m.mat[i][j] = (*this).mat[i][j] * a.mat[i][j];
+                    for(size_t k=0; k<a.getrow(); k++){
+                    sum += ((*this).mat[i][k] * a.mat[k][j]);
+                    }
+                    m.mat[i][j] = sum;
+                    sum=0;
                 }
             }
             return m;
         }
-        // Matrix operator*(double scalr, Matrix mat){
-        //     return Matrix();
-        // }
-        Matrix Matrix::operator*=(Matrix &a){
-            // if((*this).row != a.row || (*this).col != a.col){
+        zich::Matrix zich::operator*(double scalr, Matrix &mat){
+            //  if((*this).col != mat.row){
             //         throw("Iligiel of size matrtix");
             //     }
+            Matrix m = Matrix(mat);
+        
+            for (size_t i = 0; i < mat.row; i++)
+            {
+                // int sum=0;
+                for (size_t j = 0; j < mat.col; j++)
+                {
+                    m.mat[i][j] *= scalr;
+                    // sum=0;
+                }
+            }
+            return m;
+        }
+        Matrix Matrix::operator*=(Matrix &a){
             if((*this).col != a.row){
                     throw("Iligiel of size matrtix");
                 }
-            for (size_t i = 0; i < a.row; i++)
+            Matrix m = Matrix(*this);
+        
+            for (size_t i = 0; i < (*this).row; i++)
             {
+                int sum=0;
                 for (size_t j = 0; j < a.col; j++)
                 {
-                   (*this).mat[i][j] *= a.mat[i][j];
+                    for(size_t k=0; k<a.getrow(); k++){
+                    sum += (m.mat[i][k] * a.mat[k][j]);
+                    }
+                    (*this).mat[i][j] = sum;
+                    sum=0;
                 }
             }
-            return (*this);
+            return *this;
         }
         Matrix Matrix::operator*=(double scalr){
             
+            Matrix m = Matrix(*this);
+        
             for (size_t i = 0; i < (*this).row; i++)
             {
                 for (size_t j = 0; j < (*this).col; j++)
                 {
-                   (*this).mat[i][j] *= scalr;
+                    (*this).mat[i][j] *= scalr;
                 }
             }
-            return (*this);
+            return *this;
         }
-        // ostream& operator<<(ostream& ostream, Matrix m){
-        //     ostream << &m;
-            // ostream << ;
-        //     return ostream;
-        // }
-        // istream& operator>>(istream& in, Matrix m){
-            // in >> &m;
-            // cin>&m;
-        //     return in;
-        // }
+
+        ostream& zich::operator<<(ostream& os,const Matrix &m){
+            for (size_t i = 0; i < m.row; i++)
+            {
+                os << "[";
+                for (size_t j = 0; j < m.col; j++)
+                {
+                    os << m.mat[i][j];
+                    if(j != m.col-1){
+                    os << " ";
+                    }
+                }
+                os << "]\n";
+            }
+            return os;
+        }
+      
+        istream& zich::operator>>(istream& in,const Matrix &m){
+            in >> m;
+            return in;
+        }
         // string Matrix::print_mat(Matrix &a){
         //     string s;
         //     for (size_t i = 0; i < a.row; i++)
@@ -368,8 +403,37 @@ using namespace zich;
         //     return s;
         // }
 
-// int main(){
+int main(){
 
+    vector<double> identity_3 = {1,0,0,0,1,0,0,0,1};//3x3
+    Matrix mat_identity_3(identity_3,3,3);
+    int scalr = 5;
+    cout<<(scalr*mat_identity_3)<<endl;
+
+//     for (double i = 0; i < 5; i++)
+//     {
+//           vector<double> arr1 = {i,i,i,i,i,i,i,i,i};//3x3
+//         vector<double> arr2 = {i,i,i,i,i,i,i,i,i};//3x3
+
+//         vector<double> arr = {pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2)};//3x3
+//         Matrix mat1(arr1, 3, 3);
+//         Matrix mat2(arr2, 3, 3);
+//         Matrix mat(arr, 3, 3);
+//         cout<<"mat1*mat2\n"<<mat1*mat2<<endl;
+//         cout<<"mat\n"<<mat<<endl;
+//     }
+    return 0;
+}
+        // CHECK(((mat1*mat2) == mat));
+//         int random = rand() % 1000;
+//         vector<double> vec1 = {i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random};
+//         Matrix matrix(vec1, 3, 3);
+//         cout<<"**********************************************************"<<endl;
+//         cout<<"matrix * mat_identity_3:\n"<<matrix * mat_identity_3<<endl;
+//         cout<<"**********************************************************"<<endl;
+//         cout<<"matrix:\n"<<matrix<<endl;
+//         // CHECK(((matrix * mat_identity_3) == matrix));
+//     }
     // for (double i = 0; i < 10; i++)
     // {
         // vector<double> vec1 = {i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random};
@@ -378,64 +442,69 @@ using namespace zich;
 
         // vector<double> arr1 = {i,i,i,i,i,i,i,i,i};//3x3
         // vector<double> arr2 = {i,i,i,i,i,i,i,i,i};//3x3
-    // vector<double> identity_3 = {1,0,0,0,1,0,0,0,1};//3x3
-    // vector<double> vec1 = {1,1,1,1,1,1,1,1,1};//3x3
-    // vector<double> vec_vec = {1,0,0,0,1,0,0,0,1};//3x3
-    // vector<double> arr = {2,1,1,1,2,1,1,1,2};//3x3   arr = identity_3 + vec1
-    // Matrix mat1(identity_3,3,3);
-    // Matrix mat_arr(arr,3,3);
-    // Matrix mat_vec(vec1,3,3);
-    // Matrix mat_vec_vec(vec_vec,3,3);
-    // int scalr = 5;
-    // cout<<"324";
-    // cout<<(mat1+=mat_vec)<<endl;
-    // cout<<mat1<<endl;
-    // cout<<mat_vec<<endl; 
-    // cout<<"************************************"<<endl;
-    // cout<<(mat_vec+=scalr)<<endl;
-    // // cout<<mat1<<endl;
-    // cout<<mat_vec<<endl;
-    // cout<<mat_vec<<endl;
-    // cout<<mat1<<endl;
-    // cout<<mat_arr<<endl;
-    // cout<<"************************************"<<endl;
-    // cout<<(mat_arr*=scalr)<<endl;
-    // cout<<(++mat_arrmat1)<<endl;
-    // cout<<(mat1<mat_vec)<<endl;
-    // cout<<(mat1<=mat_vec)<<endl;
-    // cout<<(mat1==mat_vec_vec)<<endl;
-    // cout<<(mat1!=mat_vec_vec)<<endl;
-    // cout<<mat_vec<<endl;
-    // cout<<mat1<<endl;
-    // cout<<"************************************"<<endl;
-    // cout<<(mat1-mat_vec)<<endl;
-    // cout<<mat_arr<<endl;
-    // cout<<mat_vec<<endl; 
-    // cout<<"************************************"<<endl;
+//     vector<double> identity_3 = {1,0,0,0,1,0,0,0,1};//3x3
+//     vector<double> vec1 = {1,1,1,1,1,1,1,1,1};//3x3
+//     vector<double> vec_vec = {1,0,0,0,1,0,0,0,1};//3x3
+//     vector<double> arr = {2,1,1,1,2,1,1,1,2};//3x3   arr = identity_3 + vec1
+//     Matrix mat1(identity_3,3,3);
+//     Matrix mat_arr(arr,3,3);
+//     Matrix mat_vec(vec1,3,3);
+//     Matrix mat_vec_vec(vec_vec,3,3);
+//     int scalr = 5;
+//     // cout<<"324";
+//     cout<<"************************************"<<endl;
+//     cout<<mat_vec<<endl;
+//     // cout<<mat_arr<<endl; 
+//     cout<<"************************************"<<endl;
+//     cout<<(mat_vec*=scalr)<<endl;
+//     cout<<"************************************"<<endl;
+//     cout<<mat_vec<<endl;
+//     // cout<<mat_arr<<endl; 
+//     cout<<"************************************"<<endl;
+//     // cout<<(mat_vec+=scalr)<<endl;
+//     // cout<<mat1<<endl;
+//     // cout<<mat_vec<<endl;
+//     // cout<<mat_vec<<endl;
+//     // cout<<mat1<<endl;
+//     // cout<<mat_arr<<endl;
+//     // cout<<"************************************"<<endl;
+//     // cout<<(mat_arr*=scalr)<<endl;
+//     // cout<<(++mat_arrmat1)<<endl;
+//     // cout<<(mat1<mat_vec)<<endl;
+//     // cout<<(mat1<=mat_vec)<<endl;
+//     // cout<<(mat1==mat_vec_vec)<<endl;
+//     // cout<<(mat1!=mat_vec_vec)<<endl;
+//     // cout<<mat_vec<<endl;
+//     // cout<<mat1<<endl;
+//     // cout<<"************************************"<<endl;
+//     // cout<<(mat1-mat_vec)<<endl;
+//     // cout<<mat_arr<<endl;
+//     // cout<<mat_vec<<endl; 
+//     // cout<<"************************************"<<endl;
 
-    // cout<<(-mat1)<<endl;
-    // cout<<mat1<<endl;
-    // cout<<mat_vec<<endl; 
-    // cout<<"************************************"<<endl;
-        // vector<double> arr = {pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2)};//3x3
-        // Matrix mat1(arr1, 3, 3);
-        // Matrix mat2(arr1, 3, 3);
-        // Matrix mat(arr, 3, 3);
-        // cout<<"309";
-        // cout<<Matrix::print_mat(mat1)<<endl;
-        // cout<<"row"<<mat1.getrow()<<endl;
-        // cout<<"col"<<mat1.getcol()<<endl;
-        // for (int i = 0; i < mat.getrow(); i++)
-        //     {
-        //         cout<<"314"<<endl;
-        //         for (int j = 0; j < mat.getcol(); j++)
-        //         {
-        //             cout<<"mat[i][j]"<<mat.getmat()[i][j]<<endl;
-        //             cout<<"****************************************************************"<<endl;
-        //             cout<<"m[i][j]"<<mat1.getmat()[i][j]*mat2.getmat()[i][j]<<endl;
-        //         }
+//     // cout<<(-mat1)<<endl;
+//     // cout<<mat1<<endl;
+//     // cout<<mat_vec<<endl; 
+//     // cout<<"************************************"<<endl;
+//         // vector<double> arr = {pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2)};//3x3
+//         // Matrix mat1(arr1, 3, 3);
+//         // Matrix mat2(arr1, 3, 3);
+//         // Matrix mat(arr, 3, 3);
+//         // cout<<"309";
+//         // cout<<Matrix::print_mat(mat1)<<endl;
+//         // cout<<"row"<<mat1.getrow()<<endl;
+//         // cout<<"col"<<mat1.getcol()<<endl;
+//         // for (int i = 0; i < mat.getrow(); i++)
+//         //     {
+//         //         cout<<"314"<<endl;
+//         //         for (int j = 0; j < mat.getcol(); j++)
+//         //         {
+//         //             cout<<"mat[i][j]"<<mat.getmat()[i][j]<<endl;
+//         //             cout<<"****************************************************************"<<endl;
+//         //             cout<<"m[i][j]"<<mat1.getmat()[i][j]*mat2.getmat()[i][j]<<endl;
+//         //         }
                 
-        //     }
-    // }
+//         //     }
+//     // }
 //     return 0;
 // }

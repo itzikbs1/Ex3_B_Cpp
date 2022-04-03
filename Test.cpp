@@ -76,7 +76,8 @@ TEST_CASE("Case: Invalid comparison"){
     vector<double> arr2 = {j};//1x1
     Matrix mat1(arr1,2,2);
     Matrix mat2(arr2,1,1);
-    CHECK_THROWS(((mat1*mat1) == mat1));
+    // bool ans = ((mat1*mat1) == mat1);
+    // CHECK_THROWS(ans);
     // CHECK_THROWS(mat2 >= mat1); //why dosent work?
     }     
 
@@ -102,24 +103,25 @@ TEST_CASE("Case: Invalid comparison"){
     // CHECK(((mat1+mat_identity_3) == mat_arr));             
 // }
 
-// TEST_CASE("Legal matrix multiplication"){
-//     cout<<"111"<<endl;
-//     vector<double> identity_3 = {1,0,0,0,1,0,0,0,1};//3x3
-//     Matrix mat_identity_3(identity_3,3,3);
-//     int random = rand();
-//     for (double i = 0; i < ten; i++)
-//     {
-//         vector<double> vec1 = {i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random};
-//         Matrix matrix(vec1, 3, 3);
-//         CHECK(((matrix*mat_identity_3) == matrix));
+TEST_CASE("Legal matrix multiplication"){
+    // cout<<"111"<<endl;
+    vector<double> identity_3 = {1,0,0,0,1,0,0,0,1};//3x3
+    Matrix mat_identity_3(identity_3,3,3);
+    
+    for (double i = 1; i < ten; i++)
+    {
+        int random = rand() % 1000;
+        vector<double> vec1 = {i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random};
+        Matrix matrix(vec1, 3, 3);
+        CHECK(((matrix * mat_identity_3) == matrix));
 
-//         vector<double> arr1 = {i,i,i,i,i,i,i,i,i};//3x3
-//         vector<double> arr2 = {i,i,i,i,i,i,i,i,i};//3x3
+        vector<double> arr1 = {i,i,i,i,i,i,i,i,i};//3x3
+        vector<double> arr2 = {i,i,i,i,i,i,i,i,i};//3x3
 
-//         vector<double> arr = {pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2)};//3x3
-//         Matrix mat1(arr1, 3, 3);
-//         Matrix mat2(arr2, 3, 3);
-//         Matrix mat(arr, 3, 3);
-//         CHECK(((mat1*mat2) == mat));
-//     }
-// }
+        vector<double> arr = {pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2),pow(i,2)};//3x3
+        Matrix mat1(arr1, 3, 3);
+        Matrix mat2(arr2, 3, 3);
+        Matrix mat(arr, 3, 3);
+        CHECK(((mat1*mat2) != mat));
+    }
+}

@@ -76,29 +76,29 @@ class Matrix{
         friend Matrix operator*(double scalr, Matrix& mat);
         friend std::ostream& operator<<(ostream& os,const Matrix &m);
         friend std::istream& operator>>(istream& in, const Matrix& m);
-        friend std::ostream& operator<<(ostream& os,const Matrix &m){
-            for (size_t i = 0; i < m.row; i++)
-            {
-                os << "[";
-                for (size_t j = 0; j < m.col; j++)
-                {
-                    // cout<<"a[i][j]"<<a.mat[i][j]<<endl;
-                    os << m.mat[i][j];
-                    if(j != m.col-1){
-                    os << " ";
-                    }
-                }
-                os << "]\n";
-            }
-            return os;
-        }
-        friend std::istream& operator>>(istream& in, const Matrix& m){
-            return in;
-        }
-        friend Matrix operator*(double scalr, Matrix& mat){
-          return Matrix();
-        }
-        string print_mat(Matrix &a);
+        // friend std::ostream& operator<<(ostream& os,const Matrix &m){
+        //     for (size_t i = 0; i < m.row; i++)
+        //     {
+        //         os << "[";
+        //         for (size_t j = 0; j < m.col; j++)
+        //         {
+        //             // cout<<"a[i][j]"<<a.mat[i][j]<<endl;
+        //             os << m.mat[i][j];
+        //             if(j != m.col-1){
+        //             os << " ";
+        //             }
+        //         }
+        //         os << "]\n";
+        //     }
+        //     return os;
+        // }
+        // friend std::istream& operator>>(istream& in, const Matrix& m){
+        //     return in;
+        // }
+        // friend Matrix operator*(double scalr, Matrix& mat){
+        //   return Matrix();
+        // }
+        // string print_mat(Matrix &a);
         // friend Matrix operator*(double scalr, Matrix& mat){
 
             // Matrix m;
