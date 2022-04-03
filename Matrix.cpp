@@ -305,10 +305,10 @@ using namespace zich;
                 }
             Matrix m = Matrix(*this);
         
-            for (size_t i = 0; i < a.row; i++)
+            for (size_t i = 0; i < m.row; i++)
             {
                 int sum=0;
-                for (size_t j = 0; j < m.col; j++)
+                for (size_t j = 0; j < a.col; j++)
                 {
                     for(size_t k=0; k<a.getrow(); k++){
                     sum += ((*this).mat[i][k] * a.mat[k][j]);
@@ -403,12 +403,32 @@ using namespace zich;
         //     return s;
         // }
 
-int main(){
+// int main(){
 
-    vector<double> identity_3 = {1,0,0,0,1,0,0,0,1};//3x3
-    Matrix mat_identity_3(identity_3,3,3);
-    int scalr = 5;
-    cout<<(scalr*mat_identity_3)<<endl;
+
+//     vector<double> identity_3 = {1,0,0,0,1,0,0,0,1};//3x3
+//     vector<double> vec1 = {1,1,1,1,1,1,1,1,1};//3x3
+//     vector<double> arr = {2,1,1,1,2,1,1,1,2};//3x3   arr = identity_3 + vec1
+//     vector<double> vec2 = {1,0,0,0,0,1,0,0,0,0,1,0};//3x4
+//     vector<double> identity_4 = {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};//4x4
+//     Matrix mat_identity_3(identity_3,3,3);
+//     Matrix mat1(vec1, 3,3);
+//     Matrix mat_arr(arr,3,3);
+//     Matrix mat2(vec2,3,4);
+//     Matrix mat_identity_4(identity_4,4,4);
+
+//     cout<<"************************************************"<<endl;
+//     cout<<"mat2*mat_identity_4\n"<<mat2*mat_identity_4<<endl;
+//     cout<<"************************************************"<<endl;
+//     cout<<"mat2\n"<<mat2<<endl;
+//         // CHECK(((mat2*mat_identity_4) == mat2));
+//     return 0;
+// }
+
+//     vector<double> identity_3 = {1,0,0,0,1,0,0,0,1};//3x3
+//     Matrix mat_identity_3(identity_3,3,3);
+//     int scalr = 5;
+//     cout<<(scalr*mat_identity_3)<<endl;
 
 //     for (double i = 0; i < 5; i++)
 //     {
@@ -422,8 +442,8 @@ int main(){
 //         cout<<"mat1*mat2\n"<<mat1*mat2<<endl;
 //         cout<<"mat\n"<<mat<<endl;
 //     }
-    return 0;
-}
+//     return 0;
+// }
         // CHECK(((mat1*mat2) == mat));
 //         int random = rand() % 1000;
 //         vector<double> vec1 = {i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random,i*random};
