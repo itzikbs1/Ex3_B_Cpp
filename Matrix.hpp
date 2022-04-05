@@ -43,39 +43,39 @@ class Matrix{
         Matrix();
         // Matrix(Matrix &m);
         Matrix(vector<double> mat, int row, int col);
-        Matrix(vector<vector<double>> mat, int row, int col);
-        Matrix operator+(Matrix &a);
+        // Matrix(vector<vector<double>> mat, int row, int col);
+        Matrix operator+(const Matrix &matrix);
         Matrix operator+(double scalr);
         Matrix operator+();
-        Matrix operator+=(Matrix &a);
+        Matrix operator+=(const Matrix &matrix);
         Matrix operator+=(double scalr);
-        Matrix operator-(Matrix &a);
+        Matrix operator-(const Matrix &matrix);
         Matrix operator-(double scalr);
         Matrix operator-();
-        Matrix operator-=(Matrix &a);
+        Matrix operator-=(const Matrix &matrix);
         Matrix operator-=(double scalr);
-        bool operator>(Matrix &a);
-        bool operator>=(Matrix &a);
-        bool operator<(Matrix &a);
-        bool operator<=(Matrix &a);
-        bool operator==(Matrix &a);
-        bool operator!=(Matrix &a);
+        bool operator>(const Matrix &matrix);
+        bool operator>=(const Matrix &matrix);
+        bool operator<(const Matrix &matrix);
+        bool operator<=(const Matrix &matrix);
+        bool operator==(const Matrix &matrix);
+        bool operator!=(const Matrix &matrix);
 
         Matrix operator++ ();
         Matrix operator++ (int n);
         Matrix operator-- ();
         Matrix operator-- (int n);
 
-        Matrix operator*(Matrix &mat);
-        Matrix operator*=(Matrix &mat);
+        Matrix operator*(const Matrix &matrix);
+        Matrix operator*=(const Matrix &matrix);
         Matrix operator*=(double scalr);
 
-        bool compare_equal(Matrix &a, Matrix &b);
-        double amount(Matrix &m);
+        bool static compare_equal(const Matrix &matrix1,const Matrix &matrix2);
+        double static amount(const Matrix &matrix);
 
-        friend Matrix operator*(double scalr, Matrix& mat);
-        friend std::ostream& operator<<(ostream& os,const Matrix &m);
-        friend std::istream& operator>>(istream& in, const Matrix& m);
+        friend Matrix operator*(double scalr,const Matrix &matrix);
+        friend std::ostream& operator<<(ostream& os,const Matrix &matrix);
+        friend std::istream& operator>>(istream& in, const Matrix& matrix);
         // friend std::ostream& operator<<(ostream& os,const Matrix &m){
         //     for (size_t i = 0; i < m.row; i++)
         //     {
