@@ -10,19 +10,7 @@
 using namespace std;
 namespace zich{
 
-        // Matrix::Matrix(){
-            
-        // }
-        // Matrix::Matrix(vector<vector<double>> mat, int row, int col){
-        //     (*this).row = row;
-        //     (*this).col = col;
-        //     for (size_t i = 0; i < (*this).row; i++){
-        //             for (size_t j = 0; j < (*this).col; j++)
-        //             {
-        //                 (*this).mat[i][j] = mat[i][j];
-        //             }
-        //         }
-        // }
+        //constructor for the Matrix check if row or col less then zero
         Matrix::Matrix(vector<double> m, int row, int col){
             if(row<0 || col<0){
                 throw("Iligiel of size of row or col ");
@@ -35,31 +23,12 @@ namespace zich{
                     x++;
                 }
                 (*this).mat.push_back(vec);
-                // this->mat.push_back(vec);
             }
             (*this).row = row;
             (*this).col = col;
-            // this->row = row;
-            // this->col = col;
         }
-        //  Matrix::Matrix(Matrix &m){
-            
-        //     size_t x=0;
-        //     for(int i=0; i<row; i++){
-        //         vector<double> vec;
-        //         for(int j=0; j<col; j++){
-        //             vec.push_back(m[x]);
-        //             x++;
-        //         }
-        //         (*this).mat.push_back(vec);
-        //         // this->mat.push_back(vec);
-        //     }
-        //     (*this).row = row;
-        //     (*this).col = col;
-        //     // this->row = row;
-        //     // this->col = col;
-        // }
-
+        //check if the row differents or the col differents throw exception
+        //return new matrix of operator+ of the two matrices
         Matrix Matrix::operator+(const Matrix &matrix){
             if(matrix.row != (*this).row || matrix.col != (*this).col){
                 throw("Iligiel of size matrtix");
@@ -74,41 +43,43 @@ namespace zich{
             return m;
             }
 
-        // Matrix Matrix::operator+(double scalr){
-        //     Matrix m = Matrix(*this);
-        //     for (size_t i = 0; i < (*this).getrow(); i++)
-        //     {
-        //         for (size_t j = 0; j < (*this).getcol(); j++)
-        //         {
-        //             m.mat[i][j]+= scalr;
-        //         }
-        //     }
-        //     return m;
-        // }
+        Matrix Matrix::operator+(double scalr){
+            Matrix m = Matrix(*this);
+            for (size_t i = 0; i < (*this).getrow(); i++)
+            {
+                for (size_t j = 0; j < (*this).getcol(); j++)
+                {
+                    m.mat[i][j]+= scalr;
+                }
+            }
+            return m;
+        }
+
+        //return new matrix with the same value of this matrix
         Matrix Matrix::operator+(){
             Matrix m = Matrix(*this);
             for (size_t i = 0; i < (*this).getrow(); i++)
             {
                 for (size_t j = 0; j < (*this).getcol(); j++)
                 {
-                    // if(m.mat[i][j] < 0){
                     m.mat[i][j] *= 1;
-                // }
             }
             }
             return m;
         }
 
-        // Matrix Matrix::operator+=(const Matrix &matrix){
-        //     for (size_t i = 0; i < (*this).row; i++)
-        //     {
-        //         for (size_t j = 0; j < (*this).col; j++)
-        //         {
-        //             (*this).mat[i][j] += matrix.mat[i][j];
-        //         }
-        //     }
-        //     return (*this);
-        // }
+        Matrix Matrix::operator+=(const Matrix &matrix){
+            for (size_t i = 0; i < (*this).row; i++)
+            {
+                for (size_t j = 0; j < (*this).col; j++)
+                {
+                    (*this).mat[i][j] += matrix.mat[i][j];
+                }
+            }
+            return (*this);
+        }
+
+        //return this matrix with += scalr to every index
         Matrix Matrix::operator+=(double scalr){
             for (size_t i = 0; i < (*this).row; i++)
             {
@@ -119,6 +90,9 @@ namespace zich{
             }
             return (*this);
         }
+
+        //check if the row differents or the col differents throw exception
+        //return new matrix of operator- of the two matrices
         Matrix Matrix::operator-(const Matrix &matrix){
             Matrix m = Matrix((*this));
                 if(matrix.row != (*this).row || matrix.col != (*this).col){
@@ -133,18 +107,19 @@ namespace zich{
                 return m;
         }
 
-    //    Matrix Matrix::operator-(double scalr){
-    //         Matrix m = Matrix((*this));
+       Matrix Matrix::operator-(double scalr){
+            Matrix m = Matrix((*this));
                
-    //             for (size_t i = 0; i < (*this).row; i++)
-    //             {
-    //                 for (size_t j = 0; j < (*this).col; j++)
-    //                 {
-    //                     m.mat[i][j] -= scalr;
-    //                 }
-    //             }
-    //             return m;
-    //     }
+                for (size_t i = 0; i < (*this).row; i++)
+                {
+                    for (size_t j = 0; j < (*this).col; j++)
+                    {
+                        m.mat[i][j] -= scalr;
+                    }
+                }
+                return m;
+        }
+        //return new matrix with multu.. every index with minus one
         Matrix Matrix::operator-(){//return new one
             Matrix m = Matrix(*this);
             int minus_one = -1;
@@ -157,20 +132,21 @@ namespace zich{
                     }
                 }
                 return m;
-
         }
-        // Matrix Matrix::operator-=(const Matrix &matrix){
-        //         if(matrix.row != (*this).row || matrix.col != (*this).col){
-        //             throw("Iligiel of size matrtix");
-        //         }
-        //         for (size_t i = 0; i < (*this).row; i++){
-        //             for (size_t j = 0; j < (*this).col; j++)
-        //             {
-        //                 (*this).mat[i][j] -= matrix.mat[i][j];
-        //             }
-        //         }
-        //         return (*this);
-        // }
+        Matrix Matrix::operator-=(const Matrix &matrix){
+                if(matrix.row != (*this).row || matrix.col != (*this).col){
+                    throw("Iligiel of size matrtix");
+                }
+                for (size_t i = 0; i < (*this).row; i++){
+                    for (size_t j = 0; j < (*this).col; j++)
+                    {
+                        (*this).mat[i][j] -= matrix.mat[i][j];
+                    }
+                }
+                return (*this);
+        }
+
+        //return this matrix with += scalr to every index
         Matrix Matrix::operator-=(double scalr){
             
             for (size_t i = 0; i < (*this).row; i++){
@@ -181,6 +157,7 @@ namespace zich{
             }
             return (*this);
         }
+        //check if every index on the two matrices is the same value return false if not else true
         bool Matrix::compare_equal(const Matrix &matrix1,const Matrix &matrix2){
 
             if(matrix1.row != matrix2.row || matrix1.col != matrix2.col){
@@ -198,6 +175,7 @@ namespace zich{
             }
             return true;
         }
+        //return amount of the matrix
         double Matrix::amount(const Matrix &m){
             double sum = 0;
             for (size_t i = 0; i < m.row; i++)
@@ -209,15 +187,17 @@ namespace zich{
             }
             return sum;
         }
+        //check if this matrix bigger(amount) from the matrix that the operator get return true if yes else false
         bool Matrix::operator>(const Matrix &matrix){
             if(matrix.row != (*this).row || matrix.col != (*this).col){
-                throw("The Matrices with ouut  with the same size!");
+                throw("The Matrices with out with the same size!");
                 }
                 double sum_mat = Matrix::amount(*this);
                 double sum_matrix = Matrix::amount(matrix);
                 
                 return sum_mat > sum_matrix;
         }
+        //check if this matrix bigger or equal(amount) from the matrix that the operator get return true if yes else false
         bool Matrix::operator>=(const Matrix &matrix){
             if(matrix.row != (*this).row || matrix.col != (*this).col){
                 throw("The Matrices with ouut  with the same size!");
@@ -227,39 +207,44 @@ namespace zich{
             
             return sum_mat >= sum_matrix;
         }
+        //check if this matrix less(amount) from the matrix that the operator get return true if yes else false
         bool Matrix::operator<(const Matrix &matrix){
             if(matrix.row != (*this).row || matrix.col != (*this).col){
-                throw("The Matrices with ouut  with the same size!");
+                throw("The Matrices with out with the same size!");
                 }
             double sum_mat = Matrix::amount(*this);
             double sum_matrix = Matrix::amount(matrix);
             
             return sum_mat < sum_matrix;
         }
+        //check if this matrix less or equal(amount) from the matrix that the operator get return true if yes else false
         bool Matrix::operator<=(const Matrix &matrix){
             if(matrix.row != (*this).row || matrix.col != (*this).col){
-                throw("The Matrices with ouut  with the same size!");
+                throw("The Matrices with out with the same size!");
                 }
             double sum_mat = Matrix::amount(*this);
             double sum_matrix = Matrix::amount(matrix);
             
             return sum_mat <= sum_matrix;
         }
+        //check if the matrices the same one return true if yes else false
         bool Matrix::operator==(const Matrix &matrix){
             if(matrix.row != (*this).row || matrix.col != (*this).col){
-                throw("The Matrices with ouut  with the same size!");
+                throw("The Matrices with out with the same size!");
                 }
             return Matrix::compare_equal(*this, matrix);
         }
+        //check if the matrices not the same one return true if yes else false
         bool Matrix::operator!=(const Matrix &matrix){
             if(matrix.row != (*this).row || matrix.col != (*this).col){
-                throw("The Matrices with ouut  with the same size!");
+                throw("The Matrices with out with the same size!");
                 }
             return !(Matrix::compare_equal(*this, matrix));
         }
         // Matrix Matrix::operator*(double scalr){
         //     return Matrix();
         // }
+        //increase the values in the matrix in one and return before the increases
         Matrix Matrix::operator++(int n){
         Matrix m = Matrix(*this);
         for (size_t i = 0; i < m.row; i++)
@@ -271,6 +256,7 @@ namespace zich{
             }
             return m;
         }
+        //increase the values in the matrix in one and return after the increase
         Matrix Matrix::operator++(){
             for (size_t i = 0; i < (*this).row; i++)
             {
@@ -281,6 +267,7 @@ namespace zich{
             }
             return *this;
         }
+        //decrease the values in the matrix in one and return before the decreases
         Matrix Matrix::operator--(int n){
             Matrix m = Matrix(*this);
             for (size_t i = 0; i < m.row; i++)
@@ -292,6 +279,7 @@ namespace zich{
             }
             return m;
         }
+        //decreases the values in the matrix in one and after before the decreases
         Matrix Matrix::operator--(){
             for (size_t i = 0; i < (*this).row; i++)
             {
@@ -304,7 +292,7 @@ namespace zich{
         }
 
 
-
+        //check if the col not equal to the row than throw exception else return new matrix with the multiplication between the two matrices
         Matrix Matrix::operator*(const Matrix& matrix){
             
             if((*this).col != matrix.row){
@@ -326,6 +314,7 @@ namespace zich{
             }
             return m;
         }
+        //return new matrix with the multiplication between the matrix and scalr
         Matrix operator*(double scalr,const Matrix &matrix){
             
             Matrix m = Matrix(matrix);
@@ -339,6 +328,7 @@ namespace zich{
             }
             return m;
         }
+        //check if the col not equal to the row than throw exception else return new matrix with the multiplication between the two matrices
         Matrix Matrix::operator*=(const Matrix &matrix){
             if((*this).col != matrix.row){
                     throw("Iligiel of size matrtix");
@@ -359,10 +349,9 @@ namespace zich{
             }
             return *this;
         }
+        //return the same matrix multiplication with scalr
         Matrix Matrix::operator*=(double scalr){
             
-            Matrix m = Matrix(*this);
-        
             for (size_t i = 0; i < (*this).row; i++)
             {
                 for (size_t j = 0; j < (*this).col; j++)
