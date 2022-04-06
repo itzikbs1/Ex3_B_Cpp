@@ -1,11 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
-// #include "Demo.cpp"
-// #include <vector>
-// #include <vecintrin.h>
 #include "Matrix.hpp"
-// #include <stdexcept>
 #include "cmath"
 using namespace std;
 namespace zich{
