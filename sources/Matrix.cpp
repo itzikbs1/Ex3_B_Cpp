@@ -420,6 +420,7 @@ namespace zich{
             }
             return os;
         }
+        //count the num of col in the matrix
         int num_of_col(string str){
             int size=0;
             for (size_t i = 0; i < str.size(); i++)
