@@ -332,13 +332,9 @@ namespace zich{
         Matrix Matrix::operator*(const Matrix& matrix){
             
             if(this->col != matrix.row){
-                // cout<<"318"<<endl;
                     throw("Iligiel of size matrtix");
                 }
-            Matrix m = Matrix(this->row, matrix.col);// = Matrix(*this);
-            // m.mat = this->mat;
-            // m.row = this->row;
-            // m.col = matrix.col;
+            Matrix m = Matrix(this->row, matrix.col);
         
             for (size_t i = 0; i < (*this).row; i++)
             {
@@ -350,12 +346,6 @@ namespace zich{
                     for(size_t k=0; k<matrix.row; k++){
                     m.mat[i][j] += (this->mat[i][k] * matrix.mat[k][j]);
                     }
-                    // cout<<"m.mat[i][j]: "<<m.mat[i][j]<<endl;
-                    // cout<<"i: "<<i<<endl;
-                    // cout<<"j: "<<j<<endl;
-                    
-                    // m.mat[i][j] = sum;
-                    // sum=0;
                 }
             }
             return m;
@@ -384,20 +374,15 @@ namespace zich{
             if(this->col != matrix.row){
                     throw invalid_argument("Iligiel of size matrtix");
                 }
-            // Matrix m = Matrix(*this);
             Matrix m = Matrix(this->row, matrix.col);
         
             for (size_t i = 0; i < this->row; i++)
             {
-                // double sum=0;
                 for (size_t j = 0; j < matrix.col; j++)
                 {
                     for(size_t k=0; k<matrix.row; k++){
-                    m.mat[i][j] += (this->mat[i][k] * matrix.mat[k][j]);
-                    // this->mat[i][k] *= matrix.mat[k][j];
+                        m.mat[i][j] += (this->mat[i][k] * matrix.mat[k][j]);
                     }
-                    // this->mat[i][j] = sum;
-                    // sum=0;
                 }
             }
             *this = m;
@@ -435,35 +420,6 @@ namespace zich{
             }
             return os;
         }
-      
-        // istream& operator>>(istream& in, Matrix &m){
-
-        //     string str;
-        //     for (size_t i = 0; i < m.row; i++)
-        //     {
-        //         getline(in, str, ',');
-        //         for (size_t j = 0; j < m.col; j++)
-        //         {
-        //             // in >> m.mat[i][j];
-        //             in >> m.mat[i][j];
-        //         // in >> m.mat[i][j];
-        //         }
-        //     }
-        //     return in;
-        // }
-        // double convert_str_to_double(string str){
-        //     double result;
-        //     double d;
-        //     for (size_t i = 0; i < str.size(); i++)
-        //     {
-        //         if(str[i] >= 48 && str[i] <= 57){
-                    
-        //             d = (str.size()-1-i)*(str[i] - 48);
-        //         }
-        //         result += d;
-        //     }
-        //     return result;
-        // }
         int num_of_col(string str){
             int size=0;
             for (size_t i = 0; i < str.size(); i++)
@@ -474,26 +430,21 @@ namespace zich{
             }
             return size;
         } 
-        istream& operator>>(istream& in,  Matrix &mat){ // operator input >>
+        //operator get the input and put him in a matrix
+        istream& operator>>(istream& in,  Matrix &mat){
         
         int row =0;
         string getMat;
-        // row=3;
-    //    int row_temp = row;
-        int mat_size;
-        // vector<double> vec;
+        int mat_size = 0;
         bool ans = false;
         vector<double> v;
-        // cout<<"486"<<endl;
         while(getline(in, getMat, ',')){
-            // cout<<"488"<<endl;
             if(mat_size == getMat.size() && ans){
                 throw("not valid input");
             }
             string c;
             for (size_t i = 0; i < getMat.size(); i++)
             {
-                // cout<<"492"<<endl;
                 if(getMat[i] != '[' && getMat[i] != ']' && getMat[i] != ' ' && getMat[i] != '\n' && getMat[i] != ','){
                     c = getMat[i];
                     double d = stod(c);
@@ -501,153 +452,12 @@ namespace zich{
                 }
             }
             row++;
+            mat_size = getMat.size();
+            ans = true;
         }
         int col = num_of_col(getMat);
-        mat_size = getMat.size();
-        ans = true;
-        // cout<<"502"<<endl;
-        // cout<<"row: "<<row<<endl;
-        // cout<<"col: "<<col<<endl;
+        
         mat = Matrix(v, row, col);
-        // cout<<"mat: "<<mat<<endl;
         return in;
     }
-  
 };
-
-// // #include <iostream>
-// // #include <stdlib.h>
-// // #include <string>
-// // #include "Matrix.hpp"
-// // #include "cmath"
-//   int main(){
-//  vector<double> vector;
-//     for (double i = 0; i < 100; ++i) {
-//         vector.push_back(i);
-//     }
-//     /**
-//      * Here we will check adding,substructing of 2 different shape matrix.
-//      * we can add and substruct A and B if and only if the two matrix have same rows and cols size.
-//      */
-//     Matrix A{vector, 10, 10};
-//     Matrix B{vector, 5, 20};
-//     return 0;
-//   }
-// std::vector<double> arr1 = {-1, 0, 0, 0, -1, 0, 0, 0, -1};
-// std::vector<double> identity = {1, 0, 0, 0, 1, 0, 0, 0, 1};
-// std::vector<double> arr_b = {3, 0, 0, 0, 3, 0, 0, 0, 3};
-// std::vector<double> arr_c = {2, 0, 0, 0, 2, 0, 0, 0, 2};
-// std::vector<double> arr_d= {4, 0, 0, 0, 4, 0, 0, 0, 4};
-// std::vector<double> arr_e= {4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0};
-// std::vector<double> arr_f= {5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0};
-// std::vector<double> arr_h= {9, 0, 0, 0, 9, 0, 0, 0, 9, 0, 0, 0};
-//     Matrix mat1{identity,3,3};
-//     Matrix mat2{arr_b,3,3};
-//     Matrix mat3{arr_c,3,3};
-//     Matrix mat4{arr_d,3,3};
-//     Matrix mat5{arr_e,4,3};
-//     Matrix mat6{arr_f,4,3};
-//     mat1+=mat3;
-//     // CHECK_EQ(mat2,mat1);
-//     mat2+=mat1;
-//     mat4+=mat3;
-//     // CHECK_EQ(mat4,mat2);
-//     mat1+=mat1;
-//     // CHECK_EQ(mat1,mat2);
-//     mat1+= mat3;
-//     mat3+= mat2;
-//     // CHECK_EQ(mat3,mat1);
-//     mat5+=mat6;
-//     return 0;
-// }
-
-        // string Matrix::print_mat(Matrix &a){
-        //     string s;
-        //     for (size_t i = 0; i < a.row; i++)
-        //     {
-        //         for (size_t j = 0; j < a.col; j++)
-        //         {
-        //             // cout<<"a[i][j]"<<a.mat[i][j]<<endl;
-        //             s+=a.mat[i][j];
-        //         }
-        //     }
-        //     return s;
-        // }
-
-// // TEST_CASE ("ADD/SUB/MULTY") {
-//     cout<<"10"<<endl;
-//     vector<double> vector;
-//     for (double i = 0; i < 100; ++i) {
-//         vector.push_back(i);
-//     }
-//     cout<<"10"<<endl;
-//     /**
-//      * Here we will check adding,substructing of 2 different shape matrix.
-//      * we can add and substruct A and B if and only if the two matrix have same rows and cols size.
-//      */
-//     // Matrix::Matrix A = Matrix(vector, 10, 10);
-//     // Matrix A{vector, 10, 10};
-//     // Matrix B{vector, 5, 20};
-//     // CHECK_THROWS(A + B);
-//     // CHECK_THROWS(B + A);
-//     // CHECK_THROWS(A - B);
-//     // CHECK_THROWS(B - A);
-//     // CHECK_THROWS(A += B);
-//     // CHECK_THROWS(B += A);
-//     // CHECK_THROWS(A -= B);
-//     // CHECK_THROWS(B -= A);
-//     /**
-//      * A and B can be multiply if and only if:
-//      * A is n*m matrix
-//      * B is m*k matrix
-//      */
-//     vector.clear();
-//     for (double i = 0; i < 30; ++i) {
-//         vector.push_back(i);
-//     }
-//     Matrix C{vector, 5, 6};
-//     vector.clear();
-//     for (double i = 0; i < 60; ++i) {
-//         vector.push_back(i);
-//     }
-//     Matrix D{vector, 6, 10};
-//     //A is 10*10
-//     //B is 5*20
-//     //C is 5*6
-//     //D is 6*10
-//     // only A*A, D*A and C*D are allowed
-// //     CHECK_NOTHROW(A * A);
-// //     CHECK_THROWS(A * B);
-// //     CHECK_THROWS(A * C);
-// //     CHECK_THROWS(A * D);
-// //     CHECK_THROWS(B * A);
-// //     CHECK_THROWS(B * B);
-// //     CHECK_THROWS(B * C);
-// //     CHECK_THROWS(B * D);
-// //     CHECK_THROWS(C * A);
-// //     CHECK_THROWS(C * B);
-// //     CHECK_THROWS(C * C);
-// //     CHECK_NOTHROW(C * D);
-// //     CHECK_NOTHROW(D * A);
-// //     CHECK_THROWS(D * B);
-// //     CHECK_THROWS(D * C);
-// //     CHECK_THROWS(D * D);
-// //     CHECK_NOTHROW(A *= A);
-// //     CHECK_THROWS(A *= B);
-// //     CHECK_THROWS(A *= C);
-// //     CHECK_THROWS(A *= D);
-// //     CHECK_THROWS(B *= A);
-// //     CHECK_THROWS(B *= B);
-// //     CHECK_THROWS(B *= C);
-// //     CHECK_THROWS(B *= D);
-// //     CHECK_THROWS(C *= A);
-// //     CHECK_THROWS(C *= B);
-// //     CHECK_THROWS(C *= C);
-// //     CHECK_NOTHROW(C *= D);
-// //     CHECK_NOTHROW(D *= A);
-// //     CHECK_THROWS(D *= B);
-// //     CHECK_THROWS(D *= C);
-// //     CHECK_THROWS(D *= D);
-// // }
-//     return 0;
-// }
