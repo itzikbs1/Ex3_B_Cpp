@@ -21,22 +21,16 @@ class Matrix{
         Matrix();
         Matrix(int row, int col);
         Matrix(const vector<double> &mat, int row, int col);
-        // Matrix(vector<vector<double>> mat, int row, int col);
         Matrix operator+(const Matrix &matrix);
-        Matrix operator+(double scalr);
         Matrix operator+();
         Matrix operator+=(const Matrix &matrix);
-        Matrix operator+=(double scalr);
         Matrix operator-(const Matrix &matrix);
-        Matrix operator-(double scalr);
         Matrix operator-();
         Matrix operator-=(const Matrix &matrix);
-        Matrix operator-=(double scalr);
         bool operator>(const Matrix &matrix) const;
         bool operator>=(const Matrix &matrix) const;
         bool operator<(const Matrix &matrix) const;
         bool operator<=(const Matrix &matrix) const;
-        // bool operator==(const Matrix &matrix) const;
         bool operator!=(const Matrix &matrix) const;
 
         Matrix operator++ ();
@@ -55,18 +49,6 @@ class Matrix{
         friend Matrix operator*(Matrix &matrix, double scalr);
         friend std::ostream& operator<<(ostream& os,const Matrix &m);
         friend std::istream& operator>>(istream& in, Matrix& m);
-        
-        // int getrow();
-        // int getcol();
-        // vector<vector<double>> getmat();
-        int getrow(){
-            return row;
-        }
-        int getcol(){
-            return col;
-        }
-        vector<vector<double>> getmat(){
-            return mat;
-        }
+        int num_of_col(string str);
     };
 }
