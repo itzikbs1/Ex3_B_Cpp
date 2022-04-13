@@ -359,7 +359,6 @@ namespace zich{
         } 
         //operator get the input and put him in a matrix
         istream& operator>>(istream& in,  Matrix &mat){
-        cout<<"365"<<endl;
         int row =0;
         string get_row;
         int mat_size = 0;
@@ -367,36 +366,24 @@ namespace zich{
         vector<double> v;
         
         while(getline(in, get_row, ',')){
-            cout<<"370"<<endl;
             if(mat_size == get_row.size() && ans){
-                cout<<"372"<<endl;
                 throw("not valid input");
             }
-            // cout<<"peek "<<in.peek()<<endl;
-            // if (get_row[0] == '\n')
-            // {
-            //     break;
-            // }
             
             string c;
             for (size_t i = 0; i < get_row.size(); i++)
             {
-                cout<<"378"<<endl;
-                cout<<"get_row: "<<get_row[i]<<endl;
-                cout<<"size "<<get_row.size()<<endl;
+              
                 if(get_row[i] != '[' && get_row[i] != ']' && get_row[i] != ' ' && get_row[i] != '\n' && get_row[i] != ','){
                     c = get_row[i];
                     double d = stod(c);
                     v.push_back(d);
-                    cout<<"383"<<endl;
                 }
             }
-            cout<<"388"<<endl;
             row++;
             mat_size = get_row.size();
             ans = true;
         }
-        cout<<"398"<<endl;
         int col = num_of_col(get_row);
         
         mat = Matrix(v, row, col);
