@@ -37,21 +37,79 @@ int main(){
     cout<<"Please choose operator: "<<endl;
     cin>>oper;
 
-    if (oper == "+")
-    {
+    if (oper == "+"){
       cout<<mat1+mat2<<endl;
       
-    }else if (oper == "-")
-    {
-      cout<<mat1-mat2<<endl;
-      cout<<-mat1<<endl;
-
-    }else if (oper == "+=")
-    {
+    }else if (oper == "+u"){
+      cout<<+mat1<<endl;
+    }
+    else if (oper == "+="){
       cout<<(mat1+=mat2)<<endl;
     }
-    
-    
-    
+    else if (oper == "-"){
+      cout<<mat1-mat2<<endl;
+
+    }else if (oper == "-u"){
+      cout<<-mat1<<endl;
+    }
+    else if (oper == "-="){
+      cout<<mat1-mat2<<endl;
+      cout<<mat1<<endl;//mat1 change
+    }
+    else if(oper == ">"){
+      cout<<(mat1>mat2)<<endl;
+    }
+    else if(oper == ">="){
+      cout<<(mat1>=mat2)<<endl;
+    }
+    else if(oper == "<"){
+      cout<<(mat1<mat2)<<endl;
+    }
+    else if(oper == "<="){
+      cout<<(mat1<=mat2)<<endl;
+    }
+    else if(oper == "!="){
+      cout<<(mat1!=mat2)<<endl;
+    }
+    else if(oper == "++b"){//before
+      cout<<++mat1<<endl;
+    }
+    else if(oper == "++"){//after
+      cout<<mat1++<<endl;
+    }
+    else if(oper == "--b"){//before
+      cout<<--mat1<<endl;
+    }
+    else if(oper == "--"){//after
+      cout<<mat1--<<endl;
+    }
+    else if(oper == "*"){
+      cout<<mat1*mat2<<endl;
+    }
+    else if(oper == "*=m"){
+      cout<<(mat1*=mat2)<<endl;
+    }
+    else if(oper == "*=s"){
+      double scalar;
+      cout<<"Please choose scalar"<<endl;
+      cin >> scalar;
+      cout<<(mat1*=scalar)<<endl;
+    }
+    else if(oper == "=="){
+      cout<<(mat1==mat2)<<endl;
+    }
+    else if(oper == "s*m"){//scalar*matrix
+      double scalar;
+      cout<<"Please choose scalar"<<endl;
+      cin >> scalar;
+      cout<<(scalar*mat1)<<endl;
+    }
+    else if(oper == "s*m"){//matrix*scalar
+      double scalar;
+      cout<<"Please choose scalar"<<endl;
+      cin >> scalar;
+      cout<<(mat1*scalar)<<endl;
+    }
     return 0;
 }
+//run code with clang++ Main.cpp -o Main and after ./Main
