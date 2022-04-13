@@ -18,97 +18,108 @@ int main(){
     std::vector<double> vec = {2, 0, 0, 0, 2, 0, 0, 0, 2};
     Matrix mat2{vec,3,3};
     
-    // std::vector<double> arr_cin = {1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1};
-    // Matrix mat_cin{arr_cin,3,4};
-    // // cout<<mat1;
-    // cout << (mat1);
-
-    // istringstream cin{"[1 1 1 1], [1 1 1 1], [1 1 1 1]\n"};
-    // is >> mat1;
-    // cout <<"m: "<< (mat1)<<endl;
-    // Matrix mat1; 
-    // Matrix mat2;
     string oper;
-    // cout<<"Please give a matrix: "<<endl;
-    // cin>>mat1;
-    // cout<<mat1<<endl;
-    // cout<<"Please give another matrix: "<<endl;
-    // cin>>mat2;
+    bool ans = true;
+    while(ans){
     cout<<"Please choose operator: "<<endl;
     cin>>oper;
 
     if (oper == "+"){
+      cout<<"mat1+mat2"<<endl;
       cout<<mat1+mat2<<endl;
       
     }else if (oper == "+u"){
+      cout<<"+mat1"<<endl;
       cout<<+mat1<<endl;
     }
     else if (oper == "+="){
+      cout<<"mat1+=mat2"<<endl;
       cout<<(mat1+=mat2)<<endl;
     }
     else if (oper == "-"){
+      cout<<"mat1-mat2"<<endl;
       cout<<mat1-mat2<<endl;
 
     }else if (oper == "-u"){
+      cout<<"-mat1"<<endl;
       cout<<-mat1<<endl;
     }
     else if (oper == "-="){
-      cout<<mat1-mat2<<endl;
-      cout<<mat1<<endl;//mat1 change
+      cout<<"mat1-=mat2"<<endl;
+      cout<<(mat1-=mat2)<<endl;
     }
     else if(oper == ">"){
+      cout<<"mat1>mat2"<<endl;
       cout<<(mat1>mat2)<<endl;
     }
     else if(oper == ">="){
+      cout<<"mat1>=mat2"<<endl;
       cout<<(mat1>=mat2)<<endl;
     }
     else if(oper == "<"){
+      cout<<"mat1<mat2"<<endl;
       cout<<(mat1<mat2)<<endl;
     }
     else if(oper == "<="){
+      cout<<"mat1<=mat2"<<endl;
       cout<<(mat1<=mat2)<<endl;
     }
     else if(oper == "!="){
+      cout<<"mat1!=mat2"<<endl;
       cout<<(mat1!=mat2)<<endl;
     }
     else if(oper == "++b"){//before
+    cout<<"++mat1"<<endl;
       cout<<++mat1<<endl;
     }
     else if(oper == "++"){//after
+    cout<<"mat1++"<<endl;
       cout<<mat1++<<endl;
     }
     else if(oper == "--b"){//before
+    cout<<"--mat1"<<endl;
       cout<<--mat1<<endl;
     }
     else if(oper == "--"){//after
+    cout<<"mat1--"<<endl;
       cout<<mat1--<<endl;
     }
     else if(oper == "*"){
+      cout<<"mat1*mat2"<<endl;
       cout<<mat1*mat2<<endl;
     }
     else if(oper == "*=m"){
+      cout<<"mat1*=mat2"<<endl;
       cout<<(mat1*=mat2)<<endl;
     }
     else if(oper == "*=s"){
       double scalar;
       cout<<"Please choose scalar"<<endl;
       cin >> scalar;
+      cout<<"mat1*=scalar"<<endl;
       cout<<(mat1*=scalar)<<endl;
     }
     else if(oper == "=="){
+      cout<<"mat1==mat2"<<endl;
       cout<<(mat1==mat2)<<endl;
     }
     else if(oper == "s*m"){//scalar*matrix
       double scalar;
       cout<<"Please choose scalar"<<endl;
       cin >> scalar;
+      cout<<"scalar*mat1"<<endl;
       cout<<(scalar*mat1)<<endl;
     }
     else if(oper == "s*m"){//matrix*scalar
       double scalar;
       cout<<"Please choose scalar"<<endl;
       cin >> scalar;
+      cout<<"mat1*scalar"<<endl;
       cout<<(mat1*scalar)<<endl;
+    }
+    else if(oper == "stop"){
+      ans = false;
+    }
     }
     return 0;
 }

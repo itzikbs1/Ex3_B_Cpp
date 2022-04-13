@@ -46,7 +46,7 @@ namespace zich{
         }
         //check if the row differents or the col differents throw exception
         //return new matrix of operator+ of the two matrices
-        Matrix Matrix::operator+(const Matrix &matrix){
+        Matrix Matrix::operator+(const Matrix &matrix) const{
             if(matrix.row != this->row || matrix.col != this->col){
                 throw("Iligiel of size matrix");
             }
@@ -60,7 +60,7 @@ namespace zich{
             return m;
             }
         //return new matrix with the same value of this matrix
-        Matrix Matrix::operator+(){
+        Matrix Matrix::operator+() const{
             Matrix m = Matrix(*this);
             return m;
         }
@@ -81,7 +81,7 @@ namespace zich{
 
         //check if the row differents or the col differents throw exception
         //return new matrix of operator- of the two matrices
-        Matrix Matrix::operator-(const Matrix &matrix){
+        Matrix Matrix::operator-(const Matrix &matrix) const{
             Matrix m = Matrix((*this));
                 if(matrix.row != this->row || matrix.col != this->col){
                     throw("Iligiel of size matrtix");
@@ -96,7 +96,7 @@ namespace zich{
         }
 
         //return new matrix with multiplication every index with minus one
-        Matrix Matrix::operator-(){//return new one
+        Matrix Matrix::operator-() const{//return new one
             Matrix m = Matrix(*this);
             int minus_one = -1;
             for (size_t i = 0; i < this->row; i++){

@@ -21,11 +21,11 @@ class Matrix{
         Matrix();
         Matrix(int row, int col);
         Matrix(const vector<double> &mat, int row, int col);
-        Matrix operator+(const Matrix &matrix);
-        Matrix operator+();
+        Matrix operator+(const Matrix &matrix) const;
+        Matrix operator+() const;
         Matrix operator+=(const Matrix &matrix);
-        Matrix operator-(const Matrix &matrix);
-        Matrix operator-();
+        Matrix operator-(const Matrix &matrix) const;
+        Matrix operator-() const;
         Matrix operator-=(const Matrix &matrix);
         bool operator>(const Matrix &matrix) const;
         bool operator>=(const Matrix &matrix) const;
